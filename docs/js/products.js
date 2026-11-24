@@ -153,7 +153,7 @@ function cropStyle(flavourKey, box) {
   var sy = (2048 / h * 100).toFixed(4);
   var px = (x / (2048 - w) * 100).toFixed(4);
   var py = (y / (2048 - h) * 100).toFixed(4);
-  return "background-image:url(\"" + f.sheet + "\");background-size:" + sx + "% " + sy +
+  return "background-image:url('" + f.sheet + "');background-size:" + sx + "% " + sy +
     "%;background-position:" + px + "% " + py + "%;aspect-ratio:" + w + "/" + h + ";";
 }
 
