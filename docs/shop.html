@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Blendy | Katalog Smoothie</title>
+<meta name="description" content="Katalog lengkap smoothie Blendy: filter per rasa Berry, Kiwi, Banana, Strawberry, cari produk favoritmu, dan urutkan berdasarkan harga.">
+<meta property="og:title" content="Shop — Blendy">
+<meta property="og:description" content="Semua rasa Blendy dalam satu katalog. Filter, cari, dan pesan smoothie favoritmu.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='28' r='17' fill='%23F2AFC0'/%3E%3Cpath d='M24 13 q1-7 8-9 q1 7-5 10 q8-1 11 4 q-7 4-13-1 q-1-2-1-4z' fill='%236F9E3E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-nav="shop">
+<a class="skip-link" href="#main">Lewati ke konten</a>
+<header class="site-header" id="siteHeader"></header>
+
+<main id="main">
+  <section class="page-hero wrap">
+    <span class="eyebrow">Katalog Blendy</span>
+    <h1>Shop</h1>
+    <p>Semua rasa dalam satu tempat. Saring berdasarkan rasa, cari nama favoritmu, atau urutkan sesukamu — klik produk untuk melihat detail, ukuran, dan rekomendasi.</p>
+  </section>
+
+  <section class="section" style="padding-top:26px">
+    <div class="wrap">
+      <div class="shop-tools">
+        <div class="filter-chips" role="group" aria-label="Filter rasa">
+          <button type="button" class="filter-chip active" data-shop-cat="all">All Products</button>
+          <button type="button" class="filter-chip" data-shop-cat="berry"><span class="dot" style="background:#C2B0DC"></span>Berry</button>
+          <button type="button" class="filter-chip" data-shop-cat="kiwi"><span class="dot" style="background:#B4D58A"></span>Kiwi</button>
+          <button type="button" class="filter-chip" data-shop-cat="banana"><span class="dot" style="background:#F3DA8A"></span>Banana</button>
+          <button type="button" class="filter-chip" data-shop-cat="strawberry"><span class="dot" style="background:#F2AFC0"></span>Strawberry</button>
+        </div>
+        <div class="shop-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+          <input type="search" id="shopSearch" placeholder="Cari smoothie…" aria-label="Cari nama produk">
+        </div>
+        <label class="shop-sort">Urutkan
+          <select id="shopSort" aria-label="Urutkan produk">
+            <option value="featured">Unggulan</option>
+            <option value="price-asc">Harga Terendah</option>
+            <option value="price-desc">Harga Tertinggi</option>
+            <option value="newest">Produk Terbaru</option>
+          </select>
+        </label>
+      </div>
+      <p class="shop-result-info" id="shopResultInfo"></p>
+      <div class="product-grid" id="shopGrid"></div>
+      <div class="load-more-wrap">
+        <button type="button" class="btn btn-ghost btn-lg" id="loadMoreBtn">Load More</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Keranjang belanja">
+  <div class="drawer-head"><h3>Keranjangmu</h3><button type="button" class="drawer-close" data-cart-close aria-label="Tutup keranjang">✕</button></div>
+  <div class="drawer-body" id="cartDrawerBody"></div>
+  <div class="drawer-foot" id="cartDrawerFoot"></div>
+</aside>
+
+<div class="modal" id="quickView" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="qvTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" data-qv-close aria-label="Tutup detail produk">✕</button>
+    <div class="qv-layout" id="qvBody"></div>
+  </div>
+</div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

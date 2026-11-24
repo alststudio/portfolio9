@@ -1,0 +1,138 @@
+/* ============================================================
+   BLENDY — animations.css
+   Hero slider, panel wipe 970 ms, buah melayang, parallax,
+   animasi pembuka, scroll reveal, dan micro-interactions.
+   ============================================================ */
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding-top:var(--header-h);overflow:hidden}
+.hero-stage{position:relative;min-height:calc(100vh - var(--header-h));min-height:calc(100svh - var(--header-h))}
+.hero-slide{
+  position:absolute;inset:0;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;
+  gap:20px;padding:30px max(20px,calc((100vw - 1280px)/2 + 20px)) 90px;
+  opacity:0;pointer-events:none;visibility:hidden;
+}
+.hero-slide.active{opacity:1;pointer-events:auto;visibility:visible;position:relative}
+.hero-bg{position:absolute;inset:0;z-index:-2;transition:background .5s}
+.hero-blob{position:absolute;border-radius:50%;z-index:-1;filter:blur(2px);opacity:.55}
+.blob-a{width:56vw;height:56vw;right:-18vw;top:-22vw}
+.blob-b{width:30vw;height:30vw;left:-10vw;bottom:-16vw;opacity:.35}
+.hero-word{
+  position:absolute;z-index:0;left:50%;top:52%;transform:translate(-50%,-50%);
+  font-family:"Baloo 2",cursive;font-weight:800;font-size:clamp(6rem,17.5vw,15.5rem);
+  color:rgba(255,255,255,.34);letter-spacing:.01em;white-space:nowrap;pointer-events:none;
+  text-transform:capitalize;
+}
+.hero-content{position:relative;z-index:2;max-width:560px}
+.hero-eyebrow{font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;color:rgba(48,43,53,.66)}
+.hero-title{font-size:clamp(3.6rem,8.5vw,6.8rem);font-weight:800;margin:8px 0 6px}
+.hero-title-dot{color:#fff}
+.hero-tag{font-size:clamp(1.05rem,1.6vw,1.25rem);color:rgba(48,43,53,.78);max-width:420px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.hero-price{margin-top:22px;font-weight:600}
+.hero-rate{color:rgba(48,43,53,.66);font-weight:500}
+.hero-visual{position:relative;z-index:1;display:grid;place-items:center;min-height:380px}
+.hero-ring{position:absolute;width:min(30vw,430px);aspect-ratio:1;border-radius:50%;border:2.5px dashed rgba(255,255,255,.65)}
+.hero-ring::after{content:"";position:absolute;inset:9%;border-radius:50%;background:rgba(255,255,255,.28)}
+.hero-bottle{width:min(15.5vw,215px);min-width:128px;filter:drop-shadow(0 30px 26px rgba(48,43,53,.25));animation:bottleBob 5.2s ease-in-out infinite}
+.hero-fruit{position:absolute;z-index:2;filter:drop-shadow(0 14px 12px rgba(48,43,53,.18));pointer-events:none}
+.hero-fruit svg{width:100%;height:auto}
+
+/* Animasi pembuka: elemen naik berjenjang saat halaman dimuat */
+.rise{opacity:0}
+.hero.opened .hero-slide.active .rise{animation:riseIn .9s var(--ease) forwards}
+@keyframes riseIn{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+.hero.opened .hero-slide.active .hero-visual{animation:visualIn 1.1s var(--ease) .1s both}
+@keyframes visualIn{from{opacity:0;transform:translateY(46px) scale(.96)}to{opacity:1;transform:none}}
+
+/* Buah melayang */
+.float-el{animation:floaty 6s ease-in-out infinite}
+.float-el:nth-child(odd){animation-duration:7.2s}
+@keyframes floaty{0%,100%{margin-top:0}50%{margin-top:-16px}}
+@keyframes bottleBob{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.4deg) translateY(-8px)}}
+
+/* Panel wipe 970 ms */
+.hero-wipe{
+  position:absolute;inset:0;z-index:5;pointer-events:none;
+  transform:scaleX(0);
+}
+.hero-wipe.run{animation:wipeRun 970ms cubic-bezier(.76,0,.24,1) forwards}
+@keyframes wipeRun{
+  0%{transform:scaleX(0)}
+  48%,55%{transform:scaleX(1)}
+  100%{transform:scaleX(0);transform-origin:right center}
+}
+
+/* Kontrol hero */
+.hero-controls{
+  position:absolute;z-index:6;left:0;right:0;bottom:26px;
+  width:min(1280px,100% - 40px);margin-inline:auto;
+  display:flex;align-items:center;gap:18px;
+}
+.hero-pills{display:flex;gap:9px;flex-wrap:wrap}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border-radius:999px;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(6px);font-weight:600;font-size:.9rem;
+  border:2px solid transparent;transition:all .3s var(--ease);
+}
+.hero-pill .dot{width:11px;height:11px;border-radius:50%;background:var(--c,#fff);box-shadow:inset 0 0 0 2px rgba(255,255,255,.65)}
+.hero-pill:hover{transform:translateY(-2px);background:rgba(255,255,255,.85)}
+.hero-pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hero-arrows{margin-left:auto;display:flex;align-items:center;gap:10px}
+.hero-counter{font-weight:600;font-size:.9rem;color:rgba(48,43,53,.7);margin-right:4px;font-variant-numeric:tabular-nums}
+.arrow-btn{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.75);backdrop-filter:blur(6px);display:grid;place-items:center;box-shadow:var(--shadow-sm);transition:transform .25s var(--ease),background .25s}
+.arrow-btn:hover{transform:scale(1.1);background:#fff}
+.arrow-btn svg{width:20px;height:20px}
+
+/* ---------- Scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}
+
+/* ---------- Badge keranjang berdenyut ---------- */
+@keyframes badgePulse{0%{transform:scale(1)}40%{transform:scale(1.45)}100%{transform:scale(1)}}
+.cart-count.pulse{animation:badgePulse .45s var(--ease)}
+
+/* ---------- Marquee rasa ---------- */
+.marquee{overflow:hidden;background:var(--ink);color:#fff;padding:15px 0;transform:rotate(-1.1deg) scale(1.02)}
+.marquee-track{display:flex;gap:0;width:max-content;animation:marqueeMove 26s linear infinite}
+.marquee-track span{font-family:"Baloo 2",cursive;font-weight:700;font-size:1.15rem;padding:0 26px;white-space:nowrap;display:inline-flex;align-items:center;gap:52px}
+.marquee-track i{font-style:normal;color:var(--banana)}
+@keyframes marqueeMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- FAQ ---------- */
+.faq-item{background:var(--white);border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);margin-bottom:12px;overflow:hidden}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;padding:20px 22px;font-weight:600;font-size:1rem}
+.faq-q .faq-ic{flex:none;width:32px;height:32px;border-radius:50%;background:var(--bg);display:grid;place-items:center;transition:transform .35s var(--ease)}
+.faq-q .faq-ic svg{width:15px;height:15px}
+.faq-item.open .faq-ic{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.faq-a p{padding:0 22px 20px;color:var(--ink-soft)}
+
+/* ---------- Testimoni ---------- */
+.testi-viewport{overflow:hidden;margin:0 -10px;padding:6px 10px 18px}
+.testi-track{display:flex;gap:20px;transition:transform .6s var(--ease)}
+.testi-card{flex:0 0 calc(33.333% - 14px);background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px}
+.testi-card p{color:var(--ink-soft);flex:1}
+.testi-person{display:flex;align-items:center;gap:12px}
+.testi-ava{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:"Baloo 2",cursive;font-weight:800;font-size:1.1rem;color:var(--ink);flex:none}
+.testi-person strong{display:block;line-height:1.3}
+.testi-person small{color:var(--ink-soft)}
+.testi-nav{display:flex;align-items:center;gap:14px;justify-content:center;margin-top:8px}
+.testi-dots{display:flex;gap:8px}
+.testi-dot{width:10px;height:10px;border-radius:50%;background:var(--line);transition:all .3s;padding:0}
+.testi-dot.active{background:var(--ink);width:26px;border-radius:999px}
+
+/* ---------- Panel lupa password ---------- */
+.forgot-panel{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.forgot-panel.open{max-height:340px}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .rise{opacity:1}
+  .reveal{opacity:1;transform:none}
+  .float-el,.hero-bottle{animation:none}
+  .marquee-track{animation:none}
+}

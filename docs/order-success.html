@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesanan Berhasil — Blendy</title>
+<meta name="description" content="Pesanan demo Blendy berhasil dibuat. Halaman ini menampilkan nomor pesanan simulasi dan ringkasannya.">
+<meta property="og:title" content="Pesanan Berhasil — Blendy">
+<meta property="og:description" content="Terima kasih sudah memesan di Blendy (mode demo).">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='28' r='17' fill='%23F2AFC0'/%3E%3Cpath d='M24 13 q1-7 8-9 q1 7-5 10 q8-1 11 4 q-7 4-13-1 q-1-2-1-4z' fill='%236F9E3E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-nav="shop">
+<a class="skip-link" href="#main">Lewati ke konten</a>
+<header class="site-header" id="siteHeader"></header>
+
+<main id="main">
+  <section class="success-hero wrap">
+    <div class="success-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
+    <span class="eyebrow">Order Success</span>
+    <h1>Terima Kasih! Pesananmu Tercatat</h1>
+    <p style="color:var(--ink-soft);max-width:520px;margin:12px auto 0">Ini adalah halaman sukses untuk mode demo — tidak ada transaksi atau pembayaran sungguhan yang terjadi.</p>
+    <div><span class="success-orderno">Nomor Pesanan: <span id="successOrderNo">—</span></span></div>
+  </section>
+
+  <section class="section" style="padding-top:10px">
+    <div class="wrap">
+      <div id="successDetail"></div>
+      <div class="row-btns" style="margin-top:36px">
+        <a class="btn btn-primary btn-lg" href="index.html">Kembali ke Home</a>
+        <a class="btn btn-ghost btn-lg" href="account.html">Lihat Riwayat Pesanan</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Keranjang belanja">
+  <div class="drawer-head"><h3>Keranjangmu</h3><button type="button" class="drawer-close" data-cart-close aria-label="Tutup keranjang">✕</button></div>
+  <div class="drawer-body" id="cartDrawerBody"></div>
+  <div class="drawer-foot" id="cartDrawerFoot"></div>
+</aside>
+
+<div class="modal" id="quickView" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="qvTitle">
+  <div class="modal-card">
+    <button type="button" class="modal-close" data-qv-close aria-label="Tutup detail produk">✕</button>
+    <div class="qv-layout" id="qvBody"></div>
+  </div>
+</div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
