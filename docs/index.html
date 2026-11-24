@@ -1,2 +1,868 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><title>Segera hadir</title></head><body></body></html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blendy — Real fruit smoothies</title>
+<meta name="description" content="Blendy — Real Fruit. Real Freshness. Smoothie premium empat rasa: Berry, Kiwi, Banana, dan Strawberry. Belanja online dengan ukuran Regular, Large, dan Extra Large.">
+<meta property="og:title" content="Blendy — Real fruit smoothies">
+<meta property="og:description" content="Real Fruit. Real Freshness. Empat rasa smoothie premium: Berry, Kiwi, Banana, Strawberry.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23C2B0DC'/%3E%3Ctext x='32' y='44' font-family='Arial Black' font-size='34' font-weight='900' fill='%23302B35' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+/* ============================================================
+   HERO BLENDY — gaya mandiri (self-contained) mengikuti spek
+   hero exact-recreation. Semua ukuran memakai unit --u
+   (bingkai desain 1440x900) dan --n (UI tepi viewport).
+   ============================================================ */
+@font-face {
+  font-family: "Poppins";
+  src: url("assets/fonts/poppins-500.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("assets/fonts/poppins-600.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("assets/fonts/poppins-700.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Baloo 2";
+  src: url("assets/fonts/baloo2-800.woff2") format("woff2");
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+
+:root {
+  --u: 1px;
+  --n: clamp(0.5px, min(calc(100vw / 1440), calc(100vh / 900)), 1.3px);
+}
+
+.hx {
+  position: relative;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+  background: #C2B0DC;
+}
+@media (max-height: 540px) {
+  .hx { min-height: 0; }
+}
+
+.hx-stage {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  user-select: none; -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+.hx-slide { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
+
+.hx-frame {
+  position: absolute;
+  width: calc(1440 * var(--u));
+  height: calc(900 * var(--u));
+  left: calc(50% - 720 * var(--u));
+  top: calc(50% - 450 * var(--u) + var(--fy, 0px));
+}
+
+.hx-layer { position: absolute; inset: 0; pointer-events: none; will-change: transform; }
+
+.hx-word {
+  position: absolute; left: 0; width: 100%;
+  font-family: "Poppins", system-ui, sans-serif; font-weight: 700;
+  line-height: 1; white-space: nowrap; text-align: center;
+  color: #FFFFFF;
+  font-size: calc(445 * var(--u));
+  top: calc(181 * var(--u));
+}
+
+.hx-shadow-el {
+  position: absolute;
+  left: calc((var(--cx) - var(--w) / 2) * var(--u));
+  top: calc((var(--cy) - var(--h) / 2) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: calc(var(--h) * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(60, 40, 80, 0.22), rgba(60, 40, 80, 0));
+  filter: blur(calc(4 * var(--u)));
+}
+
+.hx-bottle, .hx-piece {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: calc(var(--bh) * var(--w) / var(--bw) * var(--u));
+}
+.hx-bg {
+  background-repeat: no-repeat;
+  background-size: calc(2048 * var(--w) / var(--bw) * var(--u)) calc(2048 * var(--w) / var(--bw) * var(--u));
+  background-position: calc(-1 * var(--bx) * var(--w) / var(--bw) * var(--u)) calc(-1 * var(--by) * var(--w) / var(--bw) * var(--u));
+}
+.hx-piece-in {
+  width: 100%; height: 100%;
+  animation: hx-bob 4s ease-in-out infinite alternate;
+}
+.hx-layer-corner .hx-piece-in { filter: blur(calc(9 * var(--u))); }
+
+@keyframes hx-bob {
+  from { transform: translateY(calc(-7 * var(--u))) rotate(calc(var(--r, 0deg) - 3deg)); }
+  to   { transform: translateY(calc(7 * var(--u))) rotate(calc(var(--r, 0deg) + 3deg)); }
+}
+
+/* ---------- Lapisan UI hero ---------- */
+.hx-ui {
+  position: absolute; inset: 0; z-index: 10;
+  pointer-events: none;
+  color: #FFFFFF;
+  text-shadow: 0 1px 6px rgba(90, 70, 40, 0.18);
+  font-family: "Poppins", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.hx-ui a, .hx-ui button {
+  pointer-events: auto;
+  background: none; border: none; color: #FFFFFF;
+  font: inherit; text-decoration: none; cursor: pointer;
+  text-shadow: 0 1px 6px rgba(90, 70, 40, 0.18);
+}
+
+.hx-header {
+  position: absolute;
+  left: calc(50 * var(--n)); right: calc(50 * var(--n));
+  top: calc(26 * var(--n)); height: calc(50 * var(--n));
+  display: flex; align-items: center;
+}
+.hx-logo {
+  font-family: "Baloo 2", "Poppins", sans-serif; font-weight: 800;
+  font-size: calc(51 * var(--n)); letter-spacing: -0.02em; line-height: 1;
+}
+.hx-tabs {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  top: calc(26 * var(--n));
+  display: flex; gap: calc(88 * var(--n));
+}
+.hx-tabs button {
+  font-weight: 500; font-size: calc(21 * var(--n));
+  padding: calc(6 * var(--n)) 0; line-height: 1.2;
+}
+.hx-underline {
+  position: absolute; left: 0; top: calc(100% + 2 * var(--n));
+  height: calc(2 * var(--n)); border-radius: calc(2 * var(--n));
+  background: #FFFFFF; width: 0;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1), width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.hx-account {
+  margin-left: auto; display: flex; align-items: center; gap: calc(22 * var(--n));
+  font-weight: 500; font-size: calc(21 * var(--n));
+}
+.hx-account .sep { opacity: 0.9; }
+.hx-cart { position: relative; display: inline-block; }
+.hx-cart .cart-badge { top: -9px; right: -16px; }
+
+.hx-shopnow {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: calc(36 * var(--n));
+  font-weight: 600; font-size: calc(21 * var(--n)); letter-spacing: 0.2em;
+  padding: calc(10 * var(--n)) calc(16 * var(--n));
+  white-space: nowrap;
+}
+.hx-arrow {
+  position: absolute; bottom: calc(30 * var(--n));
+  width: calc(52 * var(--n)); height: calc(52 * var(--n));
+  display: flex; align-items: center; justify-content: center;
+}
+.hx-arrow.prev { left: calc(36 * var(--n)); }
+.hx-arrow.next { right: calc(36 * var(--n)); }
+.hx-arrow svg { width: calc(28 * var(--n)); height: calc(28 * var(--n)); }
+
+/* Animasi pembuka: elemen UI naik memakai properti `translate`
+   agar transform pemusatan (tabs & SHOP NOW) tidak terganggu. */
+.hx [data-rise] {
+  opacity: 0; translate: 0 14px;
+  transition: opacity 1s cubic-bezier(0.22, 0.8, 0.3, 1), translate 1s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+.hx.ready [data-rise] { opacity: 1; translate: 0 0; }
+.hx [data-rise="logo"] { transition-delay: 0.25s; }
+.hx [data-rise="tabs"] { transition-delay: 0.33s; }
+.hx [data-rise="account"] { transition-delay: 0.41s; }
+.hx [data-rise="prev"] { transition-delay: 0.49s; }
+.hx [data-rise="shopnow"] { transition-delay: 0.57s; }
+.hx [data-rise="next"] { transition-delay: 0.65s; }
+
+/* ---------- Tata letak ponsel (<=820px atau potret) ---------- */
+@media (max-width: 820px) and (min-height: 541px), (orientation: portrait) {
+  :root { --n: 1px; }
+  .hx-header { left: 20px; right: 20px; top: 16px; height: 40px; }
+  .hx-logo { font-size: 34px; }
+  .hx-account { font-size: 15px; gap: 10px; }
+  .hx-tabs { top: 52px; gap: 22px; }
+  .hx-tabs button { font-size: 15px; }
+  .hx-shopnow { font-size: 15px; bottom: 22px; }
+  .hx-arrow { width: 48px; height: 48px; bottom: 12px; }
+  .hx-arrow.prev { left: 8px; }
+  .hx-arrow.next { right: 8px; }
+  .hx-arrow svg { width: 24px; height: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-piece-in { animation: none; transform: rotate(var(--r, 0deg)); }
+  .hx [data-rise] { opacity: 1 !important; translate: none !important; transition: none !important; }
+  .hx-underline { transition: none !important; }
+}
+</style>
+</head>
+<body data-page="home">
+
+<!-- ================= HERO: SLIDER RASA BLENDY ================= -->
+<section class="hx" id="hero" aria-label="Blendy — pilih rasa smoothie favoritmu">
+  <div class="hx-stage" id="heroStage"></div>
+
+  <div class="hx-ui">
+    <div class="hx-header">
+      <a class="hx-logo" data-rise="logo" href="index.html">Blendy</a>
+      <div class="hx-account" data-rise="account">
+        <a class="hx-cart" href="cart.html">Cart<span class="cart-badge" data-cart-count hidden>0</span></a>
+        <span class="sep" aria-hidden="true">|</span>
+        <a href="register.html">Register</a>
+      </div>
+    </div>
+    <nav class="hx-tabs" id="heroTabs" data-rise="tabs" aria-label="Pilih rasa">
+      <button type="button" data-flavour="0" aria-current="true">Berry</button>
+      <button type="button" data-flavour="1">Kiwi</button>
+      <button type="button" data-flavour="2">Banana</button>
+      <button type="button" data-flavour="3">Strawberry</button>
+      <span class="hx-underline" id="heroUnderline" aria-hidden="true"></span>
+    </nav>
+    <a class="hx-shopnow" data-rise="shopnow" id="shopNow" href="shop.html?product=berry-blast">SHOP NOW</a>
+    <button type="button" class="hx-arrow prev" data-rise="prev" id="prevBtn" aria-label="Previous flavour">
+      <svg viewBox="0 0 28 28" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 14H4 M12 6l-8 8 8 8"/></svg>
+    </button>
+    <button type="button" class="hx-arrow next" data-rise="next" id="nextBtn" aria-label="Next flavour">
+      <svg viewBox="0 0 28 28" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h20 M16 6l8 8-8 8"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ================= HEADER SITUS (muncul setelah hero) ================= -->
+<header class="site-bar" data-site-header></header>
+
+<main>
+  <!-- ================= PENGENALAN BRAND ================= -->
+  <section class="section">
+    <div class="wrap intro-grid">
+      <div class="intro-copy reveal">
+        <span class="eyebrow">Blendy &middot; Real Fruit. Real Freshness.</span>
+        <h2>Freshness in Every Sip.</h2>
+        <p>Blendy menghadirkan pengalaman menikmati smoothie dengan rasa buah yang menyegarkan, tampilan menarik, dan pilihan rasa yang membuat setiap momen terasa lebih istimewa.</p>
+        <a class="btn btn-primary" href="about.html">Discover Our Story</a>
+      </div>
+      <div class="intro-visual reveal" id="introVisual" style="background-color:#C2B0DC" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ================= PRODUK UNGGULAN ================= -->
+  <section class="section" style="padding-top:20px">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="background:#F2AFC0">Featured Products</span>
+        <h2>Meet Your New Favourite.</h2>
+        <p>Empat rasa utama Blendy yang paling dicintai. Klik Quick View untuk detail dan pilihan ukuran.</p>
+      </div>
+      <div class="product-grid" id="featuredGrid"></div>
+      <div class="load-more-wrap reveal">
+        <a class="btn btn-soft" href="shop.html">Lihat Semua Produk</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MENGAPA BLENDY ================= -->
+  <section class="section why-section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="background:#B4D58A">Why Blendy</span>
+        <h2>Why Everyone Loves Blendy.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon" style="background:#F2AFC0">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#302B35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.5-3.2-8-6.6-8-11a8 8 0 0 1 16 0c0 4.4-3.5 7.8-8 11z" opacity="0"/><path d="M11 3c-3 .5-5 2.6-5 5.6C6 12 8.6 14 11 14c3 0 5.6-2.4 5.6-5.4C16.6 5.6 14 3 11 3z"/><path d="M11 3c.3 3.8-.4 7.4-2.4 10.4"/></svg>
+          </div>
+          <h3>Fresh Fruit Experience</h3>
+          <p>Pengalaman rasa buah yang terasa nyata di setiap tegukan, dari tegukan pertama sampai terakhir.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon" style="background:#F3DA8A">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#302B35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.5 5.2 5.7.7-4.2 3.9 1.1 5.6L12 16.2l-5.1 2.7L8 13.3 3.8 9.4l5.7-.7L12 3.5z"/></svg>
+          </div>
+          <h3>Delicious Flavour</h3>
+          <p>Empat karakter rasa yang jelas dan seimbang \u2014 tidak ada yang terlalu manis atau hambar.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon" style="background:#B4D58A">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#302B35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+          </div>
+          <h3>Made for Every Moment</h3>
+          <p>Sarapan cepat, teman kerja, atau pelepas dahaga sore hari \u2014 Blendy selalu pas.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon" style="background:#C2B0DC">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#302B35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18.5c4-1 5-4.5 5-8V5.5h6V10c0 3.5 1 7.5 5 8.5"/><path d="M9 5.5L12 3l3 2.5"/></svg>
+          </div>
+          <h3>Beautifully Blended</h3>
+          <p>Diblender hingga halus dengan warna pastel alami buahnya \u2014 cantik dilihat, enak diminum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROMO ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="promo-banner reveal">
+        <div>
+          <h2>A Little More Freshness.</h2>
+          <p>Nikmati pengalaman smoothie favorit dengan penawaran spesial dari Blendy. Gunakan kode voucher di bawah ini saat checkout dan dapatkan potongan harga untuk pesananmu.</p>
+        </div>
+        <div class="voucher-box">
+          <div class="voucher-code">BLENDY10</div>
+          <p>Diskon 10% untuk semua produk (simulasi checkout).</p>
+          <div class="voucher-actions">
+            <button type="button" class="btn btn-soft" id="copyVoucherBtn">Salin Kode</button>
+            <button type="button" class="btn btn-primary" id="applyPromoBtn">Pakai Sekarang</button>
+            <a class="btn btn-ghost" href="shop.html">Shop Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TENTANG BLENDY (TEASER) ================= -->
+  <section class="section" style="padding-top:10px">
+    <div class="wrap about-teaser">
+      <div class="about-collage reveal" id="aboutCollage" style="background-color:#F2AFC0" aria-hidden="true"></div>
+      <div class="about-copy reveal">
+        <h2>More Than Just A Smoothie.</h2>
+        <p>Blendy lahir dari kecintaan terhadap pengalaman menikmati minuman buah yang menyenangkan. Kami ingin menghadirkan pilihan smoothie dengan karakter rasa yang unik, tampilan menarik, dan pengalaman berbelanja yang mudah.</p>
+        <a class="btn btn-primary" href="about.html">Discover Our Story</a>
+        <a class="btn btn-soft" href="shop.html">Explore Our Flavours</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONI ================= -->
+  <section class="section testi-section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="background:#F3DA8A">Testimonials</span>
+        <h2>Love From Our Customers.</h2>
+      </div>
+      <div class="testi-viewport reveal">
+        <div class="testi-track" id="testiTrack"></div>
+      </div>
+      <div class="testi-nav">
+        <button type="button" id="testiPrev" aria-label="Testimoni sebelumnya">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4 M11 5l-7 7 7 7"/></svg>
+        </button>
+        <button type="button" id="testiNext" aria-label="Testimoni berikutnya">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16 M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <p class="contoh-note">Seluruh testimoni di atas adalah konten contoh untuk keperluan demo.</p>
+    </div>
+  </section>
+
+  <!-- ================= NEWSLETTER ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="newsletter-box reveal">
+        <h2>Stay Fresh With Blendy.</h2>
+        <p>Daftarkan email Anda untuk mendapatkan informasi produk terbaru, promo, dan berbagai kabar menarik dari Blendy.</p>
+        <form class="newsletter-form" data-newsletter novalidate>
+          <input type="email" placeholder="Alamat email kamu" aria-label="Alamat email untuk newsletter">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="form-msg" role="status"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section" style="padding-top:10px">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="background:#C2B0DC">FAQ</span>
+        <h2>Sering Ditanyakan</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q" aria-expanded="false">Apa saja pilihan rasa Blendy?<span class="faq-arrow">&#9662;</span></button>
+          <div class="faq-a"><p>Blendy punya empat rasa utama: Berry, Kiwi, Banana, dan Strawberry \u2014 masing-masing dengan beberapa varian produk seperti Berry Blast, Kiwi Glow, Banana Honey Oat, dan Strawberry Cloud.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q" aria-expanded="false">Bagaimana cara melakukan pemesanan?<span class="faq-arrow">&#9662;</span></button>
+          <div class="faq-a"><p>Buka halaman Shop, pilih produk lewat Quick View atau tombol Add to Cart, atur ukuran dan jumlah, lalu buka keranjang dan lanjutkan ke Checkout. Ingat, website ini adalah demo sehingga pesanan bersifat simulasi.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q" aria-expanded="false">Apakah tersedia pilihan ukuran?<span class="faq-arrow">&#9662;</span></button>
+          <div class="faq-a"><p>Ya. Setiap produk tersedia dalam ukuran Regular, Large (+Rp7.000), dan Extra Large (+Rp14.000). Harga otomatis berubah mengikuti ukuran yang kamu pilih.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q" aria-expanded="false">Bagaimana cara menggunakan kode promo?<span class="faq-arrow">&#9662;</span></button>
+          <div class="faq-a"><p>Masukkan kode BLENDY10 di kolom voucher pada halaman Keranjang atau Checkout, lalu klik Pakai. Diskon 10% langsung terpotong dari subtotal pesananmu.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q" aria-expanded="false">Bagaimana cara melihat keranjang belanja?<span class="faq-arrow">&#9662;</span></button>
+          <div class="faq-a"><p>Klik ikon keranjang di header untuk membuka laci keranjang, atau buka halaman Cart untuk ringkasan lengkap. Isi keranjang tersimpan otomatis di browser dan tetap ada setelah halaman dimuat ulang.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q" aria-expanded="false">Bagaimana proses checkout?<span class="faq-arrow">&#9662;</span></button>
+          <div class="faq-a"><p>Di halaman Checkout, lengkapi nama, email, telepon, alamat, kota, dan kode pos, pilih metode pembayaran simulasi (Transfer Bank, E-Wallet, atau Cash on Delivery), lalu klik Buat Pesanan. Kamu akan menerima nomor pesanan simulasi seperti BLD-2026-XXXX.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button type="button" class="faq-q" aria-expanded="false">Bagaimana cara menghubungi Blendy?<span class="faq-arrow">&#9662;</span></button>
+          <div class="faq-a"><p>Kunjungi halaman Contact untuk email, WhatsApp, alamat toko contoh, dan formulir kontak. Seluruh informasi kontak di website demo ini adalah data contoh.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/app.js"></script>
+<script>
+  /* Visual pengenalan brand & kolase tentang: potongan botol/buah
+     dari sheet rasa (sistem crop yang sama dengan katalog). */
+  (function () {
+    var intro = document.getElementById("introVisual");
+    if (intro) {
+      intro.innerHTML =
+        "<span class=\"intro-bottle\" style=\"" + bottleStyle("berry") + "\"></span>" +
+        "<span class=\"intro-fruit f1 floaty\" style=\"" + fruitStyle("berry", 0) + "\"></span>" +
+        "<span class=\"intro-fruit f2 floaty-slow\" style=\"" + fruitStyle("berry", 1) + "\"></span>" +
+        "<span class=\"intro-fruit f3 floaty\" style=\"" + fruitStyle("berry", 2) + "\"></span>";
+    }
+    var col = document.getElementById("aboutCollage");
+    if (col) {
+      col.innerHTML =
+        "<span class=\"col-bottle\" style=\"" + bottleStyle("strawberry") + "\"></span>" +
+        "<span class=\"col-fruit floaty\" style=\"" + fruitStyle("strawberry", 0) + ";width:22%;left:6%;top:10%\"></span>" +
+        "<span class=\"col-fruit floaty-slow\" style=\"" + fruitStyle("strawberry", 1) + ";width:19%;right:8%;top:20%\"></span>" +
+        "<span class=\"col-fruit floaty\" style=\"" + fruitStyle("strawberry", 2) + ";width:16%;right:16%;bottom:12%\"></span>";
+    }
+  })();
+</script>
+
+<script>
+/* ============================================================
+   HERO BLENDY — mesin slider rasa (mandiri, mengikuti spek
+   exact-recreation): bingkai desain 1440x900, kata raksasa
+   diukur via canvas, wipe panel 970 ms dengan tabel cakupan
+   terukur, parallax per layer, autoplay, swipe & keyboard.
+   Adaptasi untuk web lengkap: panggung bersifat absolut di
+   dalam section hero 100svh (bukan fixed), halaman di bawahnya
+   dapat di-scroll seperti biasa.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var PROXY = "https://images.higgs.ai/?default=1&output=webp&w=2048&q=85&url=";
+  var BASE = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/";
+  function sheet(file) { return PROXY + encodeURIComponent(BASE + file); }
+
+  /* Item sheet: [x, y, lebar, tinggi]; item 1..3 = buah. */
+  var FL = [
+    {
+      word: "Berry", color: "#C2B0DC", product: "berry-blast",
+      sheet: sheet("hf_20261117_053958_8803e421-29b1-4c24-8efd-54cae3f479b4.png"),
+      bottle: { box: [233, 60, 598, 917], x: 518, y: 138, w: 372 },
+      items: [[1209, 272, 569, 573], [265, 1230, 579, 572], [1192, 1192, 626, 641]],
+      pieces: [
+        { i: 2, x: 383, y: 178, w: 104, r: 0, m: 0, l: "f" },
+        { i: 3, x: 960, y: 232, w: 118, r: 0, m: 0, l: "f" },
+        { i: 1, x: 295, y: 478, w: 129, r: -8, m: 0, l: "f" },
+        { i: 1, x: 1247, y: 455, w: 123, r: 15, m: 0, l: "f" },
+        { i: 2, x: 968, y: 590, w: 110, r: 30, m: 0, l: "f" },
+        { i: 1, x: -15, y: 590, w: 255, r: 0, m: 0, l: "c" },
+        { i: 3, x: 1282, y: 40, w: 200, r: 0, m: 0, l: "c" }
+      ]
+    },
+    {
+      word: "Kiwi", color: "#B4D58A", product: "kiwi-fresh",
+      sheet: sheet("hf_20261117_053958_b5695e60-72da-4b5b-bfb7-a091d528af75.png"),
+      bottle: { box: [217, 90, 610, 874], x: 504, y: 135, w: 403 },
+      items: [[1204, 257, 619, 601], [250, 1197, 619, 522], [1200, 1186, 633, 650]],
+      pieces: [
+        { i: 2, x: 376, y: 170, w: 144, r: -150, m: 1, l: "f" },
+        { i: 3, x: 960, y: 228, w: 152, r: 0, m: 0, l: "f" },
+        { i: 1, x: 303, y: 460, w: 168, r: 0, m: 0, l: "f" },
+        { i: 2, x: 1187, y: 462, w: 148, r: -25, m: 0, l: "f" },
+        { i: 2, x: 946, y: 606, w: 150, r: 10, m: 1, l: "f" },
+        { i: 1, x: -10, y: 575, w: 260, r: 0, m: 0, l: "c" },
+        { i: 3, x: 1285, y: 30, w: 200, r: 0, m: 0, l: "c" }
+      ]
+    },
+    {
+      word: "Banana", color: "#F3DA8A", product: "banana-smooth",
+      sheet: sheet("hf_20261117_053958_6cf14029-4bce-4c9a-b9fc-1c5b185082e3.png"),
+      bottle: { box: [194, 76, 579, 873], x: 512, y: 135, w: 383 },
+      items: [[1205, 228, 596, 597], [230, 1181, 624, 648], [1193, 1182, 646, 659]],
+      pieces: [
+        { i: 1, x: 387, y: 147, w: 123, r: 0, m: 0, l: "f" },
+        { i: 2, x: 970, y: 223, w: 136, r: -10, m: 1, l: "f" },
+        { i: 3, x: 298, y: 483, w: 132, r: 15, m: 0, l: "f" },
+        { i: 2, x: 1245, y: 462, w: 150, r: 20, m: 0, l: "f" },
+        { i: 3, x: 950, y: 582, w: 130, r: -12, m: 0, l: "f" },
+        { i: 3, x: 0, y: 585, w: 235, r: 0, m: 0, l: "c" },
+        { i: 1, x: 1280, y: 30, w: 190, r: 0, m: 0, l: "c" }
+      ]
+    },
+    {
+      word: "Strawberry", color: "#F2AFC0", product: "strawberry-dream",
+      sheet: sheet("hf_20261117_055135_cbfb5a8d-c52b-4358-a6ee-d941c6c42285.png"),
+      bottle: { box: [226, 88, 594, 887], x: 512, y: 135, w: 386 },
+      items: [[1190, 216, 561, 653], [257, 1168, 604, 662], [1240, 1169, 632, 686]],
+      pieces: [
+        { i: 1, x: 372, y: 142, w: 128, r: 0, m: 0, l: "f" },
+        { i: 2, x: 955, y: 225, w: 117, r: 20, m: 0, l: "f" },
+        { i: 3, x: 290, y: 455, w: 140, r: -10, m: 0, l: "f" },
+        { i: 3, x: 1250, y: 432, w: 135, r: 15, m: 0, l: "f" },
+        { i: 2, x: 962, y: 558, w: 146, r: -15, m: 0, l: "f" },
+        { i: 1, x: -10, y: 555, w: 245, r: 0, m: 0, l: "c" },
+        { i: 1, x: 1285, y: 35, w: 200, r: 20, m: 0, l: "c" }
+      ]
+    }
+  ];
+
+  /* Bayangan lantai yang sama di semua slide: [cx, cy, w, h] */
+  var SHADOWS = [[345, 650, 170, 24], [720, 708, 320, 30], [1318, 638, 160, 22], [1045, 760, 150, 22]];
+
+  /* Faktor parallax per layer (urutan: kata, bayangan, botol, buah, sudut) */
+  var LAYER_DEFS = [
+    { cls: "hx-layer hx-layer-word", factor: 0.40 },
+    { cls: "hx-layer hx-layer-shadow", factor: 0.30 },
+    { cls: "hx-layer hx-layer-bottle", factor: 0.15 },
+    { cls: "hx-layer hx-layer-fruit", factor: 0.55 },
+    { cls: "hx-layer hx-layer-corner", factor: 0.75 }
+  ];
+
+  /* Tabel cakupan wipe terukur (t -> c) dari spek */
+  var COVER_T = [0, 0.031, 0.134, 0.206, 0.278, 0.34, 0.412, 0.485, 0.546, 0.583, 0.62, 0.69, 0.79, 0.85, 0.93, 1];
+  var COVER_C = [0, 0.006, 0.012, 0.023, 0.047, 0.07, 0.105, 0.158, 0.246, 0.55, 0.825, 0.9, 0.94, 0.956, 0.975, 1];
+
+  var REDUCED = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  var hero = document.getElementById("hero");
+  var stage = document.getElementById("heroStage");
+  var tabsNav = document.getElementById("heroTabs");
+  var underline = document.getElementById("heroUnderline");
+  var shopNow = document.getElementById("shopNow");
+  var tabBtns = Array.prototype.slice.call(tabsNav.querySelectorAll("button[data-flavour]"));
+  if (!hero || !stage) return;
+
+  var u = 1, mobile = false;
+  var current = 0, animating = false, opened = false;
+  var lastInteract = -1000000000;
+
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function easeOutQuad(x) { return 1 - (1 - x) * (1 - x); }
+
+  function cover(t) {
+    if (t <= 0) return 0;
+    if (t >= 1) return 1;
+    for (var i = 0; i < COVER_T.length - 1; i++) {
+      if (t <= COVER_T[i + 1]) {
+        var k = (t - COVER_T[i]) / (COVER_T[i + 1] - COVER_T[i]);
+        var s = k * k * (3 - 2 * k);
+        return COVER_C[i] + (COVER_C[i + 1] - COVER_C[i]) * s;
+      }
+    }
+    return 1;
+  }
+
+  /* ---------- Bangun DOM slide ---------- */
+  function setCropVars(el, box, x, y, w) {
+    el.style.setProperty("--bx", box[0]);
+    el.style.setProperty("--by", box[1]);
+    el.style.setProperty("--bw", box[2]);
+    el.style.setProperty("--bh", box[3]);
+    el.style.setProperty("--x", x);
+    el.style.setProperty("--y", y);
+    el.style.setProperty("--w", w);
+  }
+
+  function buildSlides() {
+    return FL.map(function (f) {
+      var sec = document.createElement("section");
+      sec.className = "hx-slide";
+      sec.style.backgroundColor = f.color;
+      sec.setAttribute("aria-label", "Rasa " + f.word);
+
+      var frame = document.createElement("div");
+      frame.className = "hx-frame";
+
+      var layers = LAYER_DEFS.map(function (def) {
+        var layer = document.createElement("div");
+        layer.className = def.cls;
+        frame.appendChild(layer);
+        return { el: layer, factor: def.factor };
+      });
+
+      /* Kata rasa */
+      var wordEl = document.createElement("div");
+      wordEl.className = "hx-word";
+      wordEl.textContent = f.word;
+      layers[0].el.appendChild(wordEl);
+
+      /* Bayangan lantai */
+      SHADOWS.forEach(function (s) {
+        var sh = document.createElement("div");
+        sh.className = "hx-shadow-el";
+        sh.style.setProperty("--cx", s[0]);
+        sh.style.setProperty("--cy", s[1]);
+        sh.style.setProperty("--w", s[2]);
+        sh.style.setProperty("--h", s[3]);
+        layers[1].el.appendChild(sh);
+      });
+
+      /* Botol (tidak ikut melayang) */
+      var bottle = document.createElement("div");
+      bottle.className = "hx-bottle hx-bg";
+      setCropVars(bottle, f.bottle.box, f.bottle.x, f.bottle.y, f.bottle.w);
+      bottle.style.backgroundImage = "url(\"" + f.sheet + "\")";
+      layers[2].el.appendChild(bottle);
+
+      /* Potongan buah */
+      f.pieces.forEach(function (p) {
+        var box = f.items[p.i - 1];
+        var outer = document.createElement("div");
+        outer.className = "hx-piece";
+        setCropVars(outer, box, p.x, p.y, p.w);
+        if (p.m) outer.style.transform = "scaleX(-1)";
+        var inner = document.createElement("div");
+        inner.className = "hx-piece-in hx-bg";
+        inner.style.backgroundImage = "url(\"" + f.sheet + "\")";
+        inner.style.setProperty("--r", p.r + "deg");
+        inner.style.animationDuration = (3.2 + Math.random() * 1.8).toFixed(2) + "s";
+        inner.style.animationDelay = (-Math.random() * 4).toFixed(2) + "s";
+        outer.appendChild(inner);
+        layers[p.l === "c" ? 4 : 3].el.appendChild(outer);
+      });
+
+      sec.appendChild(frame);
+      stage.appendChild(sec);
+      return { el: sec, layers: layers, wordEl: wordEl, data: f };
+    });
+  }
+
+  var slides = buildSlides();
+  slides[0].el.style.visibility = "visible";
+  slides[0].el.style.zIndex = 2;
+  slides[0].el.classList.add("is-current");
+
+  /* ---------- Pengukuran kata (canvas) ---------- */
+  var mctx = null;
+  function measureInk(word) {
+    try {
+      if (!mctx) {
+        var cv = document.createElement("canvas");
+        mctx = cv.getContext("2d");
+      }
+      if (!mctx) return 0;
+      mctx.font = "700 100px Poppins, system-ui, sans-serif";
+      var m = mctx.measureText(word);
+      return (m.actualBoundingBoxLeft || 0) + (m.actualBoundingBoxRight || 0);
+    } catch (e) { return 0; }
+  }
+
+  function layoutWord(s) {
+    var ink = measureInk(s.data.word);
+    var F = 445, ls = "0.005em";
+    var visW = Math.min(1440, (hero.clientWidth || window.innerWidth) / (u || 1));
+    var limit = 1330, target = 1400;
+    if (mobile) {
+      var mTarget = 0.92 * visW;
+      if (mTarget < limit) { limit = mTarget; target = mTarget; }
+    }
+    if (ink > 0 && ink * 4.45 > limit) {
+      ls = "-0.035em";
+      F = Math.min(445, target / ink * 100);
+    }
+    var baseline = 403.5 + 0.698 * F / 2;
+    var top = baseline - 0.85 * F;
+    s.wordEl.style.fontSize = (F * u) + "px";
+    s.wordEl.style.top = (top * u) + "px";
+    s.wordEl.style.letterSpacing = ls;
+  }
+
+  /* ---------- Tata letak & skala ---------- */
+  function moveUnderline(i) {
+    var tab = tabBtns[i];
+    if (!tab || !underline) return;
+    underline.style.width = tab.offsetWidth + "px";
+    underline.style.transform = "translateX(" + tab.offsetLeft + "px)";
+  }
+
+  function layout() {
+    var w = hero.clientWidth || window.innerWidth;
+    var h = hero.clientHeight || window.innerHeight;
+    mobile = (w <= 820 && h >= 541) || h > w;
+    u = mobile ? Math.min(w / 640, (h - 200) / 620) : Math.min(w / 1440, h / 900);
+    document.documentElement.style.setProperty("--u", u + "px");
+    stage.style.setProperty("--fy", mobile ? "8px" : "0px");
+    slides.forEach(layoutWord);
+    moveUnderline(current);
+  }
+
+  function setActiveTab(i) {
+    tabBtns.forEach(function (b, j) {
+      if (j === i) b.setAttribute("aria-current", "true");
+      else b.removeAttribute("aria-current");
+    });
+    moveUnderline(i);
+  }
+
+  function setShopNow(i) {
+    shopNow.setAttribute("href", "shop.html?product=" + FL[i].product);
+  }
+
+  /* ---------- Pergantian rasa ---------- */
+  function finishSwap(A, B, idx) {
+    A.el.style.clipPath = "";
+    A.el.style.zIndex = "";
+    A.el.style.visibility = "hidden";
+    A.el.classList.remove("is-current");
+    A.layers.forEach(function (L) { L.el.style.transform = ""; });
+    B.layers.forEach(function (L) { L.el.style.transform = ""; });
+    B.el.style.visibility = "visible";
+    B.el.style.zIndex = 2;
+    B.el.classList.add("is-current");
+    current = idx;
+    animating = false;
+  }
+
+  function goTo(idx, dir, user) {
+    if (user) lastInteract = performance.now();
+    if (idx === current || animating) return;
+    var A = slides[current], B = slides[idx];
+    setActiveTab(idx);
+    setShopNow(idx);
+    if (REDUCED) { finishSwap(A, B, idx); return; }
+    animating = true;
+    B.el.style.visibility = "visible";
+    B.el.style.zIndex = 1;
+    A.el.style.zIndex = 2;
+    var fw = 1440 * u;
+    B.layers.forEach(function (L) {
+      L.el.style.transform = "translateX(" + (dir * L.factor * fw) + "px)";
+    });
+    var start = performance.now();
+    function frame(now) {
+      var t = (now - start) / 970;
+      var tw = Math.min(t, 1);
+      var c = cover(tw);
+      A.el.style.clipPath = dir > 0
+        ? "inset(0 " + (c * 100) + "% 0 0)"
+        : "inset(0 0 0 " + (c * 100) + "%)";
+      var ax = -dir * c * 0.14 * fw;
+      A.layers.forEach(function (L) { L.el.style.transform = "translateX(" + ax + "px)"; });
+      var k = easeOutQuad(clamp((t - 0.5) / 0.42, 0, 1));
+      B.layers.forEach(function (L) {
+        L.el.style.transform = "translateX(" + (dir * (1 - k) * L.factor * fw) + "px)";
+      });
+      if (tw < 1 || k < 1) requestAnimationFrame(frame);
+      else finishSwap(A, B, idx);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function next(user) { goTo((current + 1) % 4, 1, user); }
+  function prev(user) { goTo((current + 3) % 4, -1, user); }
+
+  /* ---------- Kontrol ---------- */
+  tabBtns.forEach(function (btn, i) {
+    btn.addEventListener("click", function () {
+      if (i === current) { lastInteract = performance.now(); return; }
+      goTo(i, i > current ? 1 : -1, true);
+    });
+  });
+  document.getElementById("nextBtn").addEventListener("click", function () { next(true); });
+  document.getElementById("prevBtn").addEventListener("click", function () { prev(true); });
+
+  window.addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    var t = e.target;
+    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
+    var rect = hero.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    if (e.key === "ArrowRight") next(true); else prev(true);
+  });
+
+  var swipeX = null, swipeY = null;
+  stage.addEventListener("pointerdown", function (e) {
+    if (e.target.closest && e.target.closest("a,button")) return;
+    swipeX = e.clientX; swipeY = e.clientY;
+  });
+  window.addEventListener("pointerup", function (e) {
+    if (swipeX === null) return;
+    var dx = e.clientX - swipeX, dy = e.clientY - swipeY;
+    swipeX = null; swipeY = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) next(true); else prev(true);
+    }
+  });
+
+  /* Autoplay: tiap 2600 ms, hanya saat halaman terlihat dan
+     tidak ada interaksi dalam 6 detik terakhir. */
+  setInterval(function () {
+    if (document.hidden || animating) return;
+    if (performance.now() - lastInteract < 6000) return;
+    next(false);
+  }, 2600);
+
+  /* ---------- Urutan pembuka ---------- */
+  function startOpening() {
+    layout();
+    if (opened) return;
+    opened = true;
+    if (REDUCED) { hero.classList.add("ready"); return; }
+    var fw = 1440 * u;
+    var B = slides[0];
+    B.layers.forEach(function (L) {
+      if (L.el.animate) {
+        L.el.animate(
+          [{ transform: "translateX(" + (L.factor * fw) + "px)" }, { transform: "translateX(0px)" }],
+          { duration: 900, easing: "cubic-bezier(0.22, 0.8, 0.3, 1)" }
+        );
+      }
+    });
+    hero.classList.add("ready");
+  }
+
+  layout();
+  setActiveTab(0);
+  setShopNow(0);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { layout(); startOpening(); });
+  }
+  setTimeout(startOpening, 3000); /* pengaman 3 detik */
+
+  var resizeTimer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layout, 80);
+  });
+})();
+</script>
+</body>
+</html>

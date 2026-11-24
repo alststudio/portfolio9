@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login — Blendy</title>
+<meta name="description" content="Masuk ke akun demo Blendy untuk melihat riwayat pesananmu.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23C2B0DC'/%3E%3Ctext x='32' y='44' font-family='Arial Black' font-size='34' font-weight='900' fill='%23302B35' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="login">
+<header class="site-bar" data-site-header></header>
+
+<main>
+  <div class="page-head wrap">
+    <h1>Login</h1>
+    <p>Selamat datang kembali di Blendy.</p>
+  </div>
+
+  <section class="page-section wrap">
+    <div class="form-card">
+      <div class="form-note"><strong>Mode demo:</strong> login ini hanya simulasi frontend. Kata sandi tidak pernah disimpan \u2014 sesi demo hanya menyimpan nama dan email di browser kamu.</div>
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="liEmail">Email</label>
+          <input type="email" id="liEmail" autocomplete="email" placeholder="nama@email.com">
+        </div>
+        <div class="field">
+          <label for="liPass">Kata Sandi</label>
+          <input type="password" id="liPass" autocomplete="current-password" placeholder="Minimal 6 karakter">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Masuk (Demo)</button>
+      </form>
+      <p class="form-alt">
+        <button type="button" class="link-btn" id="forgotToggle">Lupa kata sandi?</button>
+      </p>
+      <div id="forgotPanel" hidden>
+        <form id="forgotForm" novalidate style="margin-top:14px">
+          <div class="field">
+            <label for="fpEmail">Email untuk Atur Ulang</label>
+            <input type="email" id="fpEmail" placeholder="nama@email.com">
+          </div>
+          <button type="submit" class="btn btn-soft btn-block">Kirim Tautan (Simulasi)</button>
+          <p class="form-msg" id="forgotMsg" role="status"></p>
+        </form>
+      </div>
+      <p class="form-alt">Belum punya akun? <a href="register.html">Register di sini</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

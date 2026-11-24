@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register — Blendy</title>
+<meta name="description" content="Buat akun demo Blendy untuk pengalaman belanja yang lebih personal.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F3DA8A'/%3E%3Ctext x='32' y='44' font-family='Arial Black' font-size='34' font-weight='900' fill='%23302B35' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="register">
+<header class="site-bar" data-site-header></header>
+
+<main>
+  <div class="page-head wrap">
+    <h1>Register</h1>
+    <p>Buat akun dan mulai petualangan rasa kamu.</p>
+  </div>
+
+  <section class="page-section wrap">
+    <div class="form-card">
+      <div class="form-note"><strong>Mode demo:</strong> pendaftaran ini adalah simulasi frontend. Kata sandi <strong>tidak disimpan</strong> di mana pun \u2014 hanya nama dan email yang disimpan di browser untuk sesi demo.</div>
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="rgName">Nama Lengkap</label>
+          <input type="text" id="rgName" autocomplete="name" placeholder="Nama kamu">
+        </div>
+        <div class="field">
+          <label for="rgEmail">Email</label>
+          <input type="email" id="rgEmail" autocomplete="email" placeholder="nama@email.com">
+        </div>
+        <div class="field">
+          <label for="rgPass">Kata Sandi</label>
+          <input type="password" id="rgPass" autocomplete="new-password" placeholder="Minimal 6 karakter">
+        </div>
+        <div class="field">
+          <label for="rgPass2">Konfirmasi Kata Sandi</label>
+          <input type="password" id="rgPass2" autocomplete="new-password" placeholder="Ulangi kata sandi">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Buat Akun (Demo)</button>
+      </form>
+      <p class="form-alt">Sudah punya akun? <a href="login.html">Login di sini</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

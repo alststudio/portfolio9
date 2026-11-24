@@ -1,0 +1,35 @@
+# Blendy — konfigurasi Apache opsional (shared hosting / cPanel)
+
+# Halaman tidak ditemukan yang ramah
+ErrorDocument 404 /index.html
+
+# Paksa HTTPS bila sertifikat tersedia (aktifkan setelah SSL terpasang)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Header keamanan dasar
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Kompresi teks
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
+
+# Cache aset statis
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType font/woff2 "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+</IfModule>
+
+# Sembunyikan file sensitif
+<FilesMatch "(^\.|\.(md|json|lock)$)">
+  Require all denied
+</FilesMatch>

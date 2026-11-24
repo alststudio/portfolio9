@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Blendy</title>
+<meta name="description" content="Checkout demo Blendy: lengkapi data pengiriman, pilih metode pembayaran simulasi, dan selesaikan pesanan.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23B4D58A'/%3E%3Ctext x='32' y='44' font-family='Arial Black' font-size='34' font-weight='900' fill='%23302B35' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="checkout">
+<header class="site-bar" data-site-header></header>
+
+<main>
+  <div class="page-head wrap">
+    <h1>Checkout</h1>
+    <p>Satu langkah lagi menuju smoothie favoritmu.</p>
+  </div>
+
+  <section class="page-section wrap">
+    <form id="checkoutForm" novalidate>
+      <div class="cart-layout">
+        <div>
+          <div class="cart-panel" style="margin-bottom:26px">
+            <h3 style="font-family:'Baloo 2',sans-serif;font-size:21px;margin-bottom:18px">Informasi Pelanggan</h3>
+            <div class="field">
+              <label for="coName">Nama Lengkap</label>
+              <input type="text" id="coName" autocomplete="name" placeholder="Nama lengkap kamu">
+            </div>
+            <div class="field">
+              <label for="coEmail">Email</label>
+              <input type="email" id="coEmail" autocomplete="email" placeholder="nama@email.com">
+            </div>
+            <div class="field">
+              <label for="coPhone">Nomor Telepon</label>
+              <input type="tel" id="coPhone" autocomplete="tel" placeholder="08xxxxxxxxxx">
+            </div>
+            <div class="field">
+              <label for="coAddress">Alamat</label>
+              <input type="text" id="coAddress" autocomplete="street-address" placeholder="Jalan, nomor rumah, RT/RW, kelurahan">
+            </div>
+            <div class="field">
+              <label for="coCity">Kota</label>
+              <input type="text" id="coCity" autocomplete="address-level2" placeholder="Kota / Kabupaten">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label for="coZip">Kode Pos</label>
+              <input type="text" id="coZip" inputmode="numeric" autocomplete="postal-code" placeholder="5 digit kode pos">
+            </div>
+          </div>
+
+          <div class="cart-panel">
+            <h3 style="font-family:'Baloo 2',sans-serif;font-size:21px;margin-bottom:6px">Metode Pembayaran</h3>
+            <p class="form-note">Semua metode di bawah ini adalah <strong>simulasi</strong> \u2014 tidak ada pembayaran sungguhan yang diproses di website demo ini.</p>
+            <div class="pay-options">
+              <label class="pay-option"><input type="radio" name="payment" value="Transfer Bank"><span>Transfer Bank<small>Simulasi transfer ke rekening virtual contoh.</small></span></label>
+              <label class="pay-option"><input type="radio" name="payment" value="E-Wallet"><span>E-Wallet<small>Simulasi pembayaran dompet digital contoh.</small></span></label>
+              <label class="pay-option"><input type="radio" name="payment" value="Cash on Delivery"><span>Cash on Delivery<small>Bayar tunai (simulasi) saat pesanan tiba.</small></span></label>
+            </div>
+            <p class="form-msg" id="payMsg" role="alert"></p>
+          </div>
+        </div>
+
+        <div class="cart-panel">
+          <h3 style="font-family:'Baloo 2',sans-serif;font-size:21px;margin-bottom:8px">Ringkasan Pesanan</h3>
+          <div id="summaryItems"></div>
+          <div class="voucher-row">
+            <input type="text" id="coVoucherInput" placeholder="Kode voucher" aria-label="Kode voucher">
+            <button type="button" class="btn btn-soft" id="coApplyVoucher">Pakai</button>
+          </div>
+          <p class="form-msg" id="coVoucherMsg" role="status"></p>
+          <div id="summaryTotals"></div>
+          <button type="submit" class="btn btn-primary btn-block">Buat Pesanan (Simulasi)</button>
+          <a class="btn btn-ghost btn-block" href="cart.html">Kembali ke Keranjang</a>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/app.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

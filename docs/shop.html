@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop — Blendy Smoothie</title>
+<meta name="description" content="Katalog smoothie Blendy: Berry Blast, Kiwi Fresh, Banana Smooth, Strawberry Dream, dan lainnya. Filter rasa, cari produk, dan pesan ukuran favoritmu.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F2AFC0'/%3E%3Ctext x='32' y='44' font-family='Arial Black' font-size='34' font-weight='900' fill='%23302B35' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="shop">
+<header class="site-bar" data-site-header></header>
+
+<main>
+  <div class="page-head wrap">
+    <h1>Shop</h1>
+    <p>Semua rasa Blendy dalam satu katalog. Gunakan filter rasa, pencarian, dan urutan harga untuk menemukan favoritmu.</p>
+  </div>
+
+  <section class="page-section wrap">
+    <div class="shop-toolbar">
+      <div class="chip-row" role="group" aria-label="Filter berdasarkan rasa">
+        <button type="button" class="chip active" data-cat="all">All Products</button>
+        <button type="button" class="chip" data-cat="berry">Berry</button>
+        <button type="button" class="chip" data-cat="kiwi">Kiwi</button>
+        <button type="button" class="chip" data-cat="banana">Banana</button>
+        <button type="button" class="chip" data-cat="strawberry">Strawberry</button>
+      </div>
+      <div class="shop-tools">
+        <input type="search" id="shopSearch" placeholder="Cari nama produk..." aria-label="Cari nama produk">
+        <select id="shopSort" aria-label="Urutkan produk">
+          <option value="featured">Unggulan</option>
+          <option value="price-asc">Harga Terendah</option>
+          <option value="price-desc">Harga Tertinggi</option>
+          <option value="newest">Produk Terbaru</option>
+        </select>
+      </div>
+    </div>
+    <p class="shop-count" id="shopCount"></p>
+    <div class="product-grid" id="shopGrid"></div>
+    <div class="load-more-wrap">
+      <button type="button" class="btn btn-soft" id="loadMoreBtn" hidden>Load More</button>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

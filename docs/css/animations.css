@@ -1,0 +1,42 @@
+/* ============================================================
+   Blendy — animasi situs (di luar hero): scroll reveal,
+   melayang, dan micro-interactions.
+   ============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.8s cubic-bezier(0.22, 0.8, 0.3, 1), transform 0.8s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+@keyframes floaty {
+  from { transform: translateY(-8px) rotate(-2deg); }
+  to   { transform: translateY(8px) rotate(2deg); }
+}
+.floaty { animation: floaty 4.2s ease-in-out infinite alternate; }
+.floaty-slow { animation: floaty 5.6s ease-in-out infinite alternate; }
+
+@keyframes badge-bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+.cart-badge.bump { animation: badge-bump 0.45s cubic-bezier(0.22, 0.8, 0.3, 1); }
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+.modal-card { animation: pop-in 0.4s cubic-bezier(0.22, 0.8, 0.3, 1); }
+
+.product-card .card-bottle,
+.intro-bottle,
+.modal-bottle { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .floaty, .floaty-slow, .cart-badge.bump, .modal-card { animation: none !important; }
+  .testi-track, .faq-a, .cart-drawer, .toast, .btn, .product-card { transition: none !important; }
+}

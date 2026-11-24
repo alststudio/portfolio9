@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Story — Blendy</title>
+<meta name="description" content="Kisah Blendy: brand smoothie yang lahir dari kecintaan terhadap pengalaman menikmati minuman buah yang menyenangkan.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23B4D58A'/%3E%3Ctext x='32' y='44' font-family='Arial Black' font-size='34' font-weight='900' fill='%23302B35' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="about">
+<header class="site-bar" data-site-header></header>
+
+<main>
+  <div class="page-head wrap">
+    <h1>Our Story</h1>
+    <p>Perjalanan Blendy menghadirkan pengalaman smoothie yang menyenangkan.</p>
+  </div>
+
+  <section class="page-section wrap">
+    <div class="about-teaser">
+      <div class="story-visual reveal" style="background-color:#B4D58A" id="storyVisual" aria-hidden="true"></div>
+      <div class="about-copy reveal">
+        <h2>More Than Just A Smoothie.</h2>
+        <p>Blendy lahir dari kecintaan terhadap pengalaman menikmati minuman buah yang menyenangkan. Kami ingin menghadirkan pilihan smoothie dengan karakter rasa yang unik, tampilan menarik, dan pengalaman berbelanja yang mudah.</p>
+        <p>Setiap rasa Blendy dirancang seperti kepribadian: Berry yang ceria, Kiwi yang segar dan ringan, Banana yang lembut, dan Strawberry yang manis. Empat karakter, satu tujuan \u2014 membuat harimu terasa lebih segar.</p>
+        <a class="btn btn-primary" href="shop.html">Explore Our Flavours</a>
+      </div>
+    </div>
+
+    <div class="vm-grid" style="margin-top:64px">
+      <div class="vm-card reveal">
+        <h4>Visi Kami</h4>
+        <p>Menjadi brand smoothie yang paling dicintai karena rasa, tampilan, dan pengalaman belanja yang menyenangkan di setiap langkahnya.</p>
+      </div>
+      <div class="vm-card reveal">
+        <h4>Misi Kami</h4>
+        <p>Menghadirkan pilihan rasa buah yang beragam dan konsisten, menyajikannya dengan visual yang menggugah, serta melayani pelanggan dengan cepat dan ramah \u2014 dari halaman pertama sampai tegukan terakhir.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/app.js"></script>
+<script>
+  (function () {
+    var v = document.getElementById("storyVisual");
+    if (v) {
+      v.innerHTML =
+        "<span class=\"col-bottle\" style=\"" + bottleStyle("kiwi") + "\"></span>" +
+        "<span class=\"col-fruit floaty\" style=\"" + fruitStyle("kiwi", 0) + ";width:24%;left:6%;top:12%\"></span>" +
+        "<span class=\"col-fruit floaty-slow\" style=\"" + fruitStyle("kiwi", 2) + ";width:21%;right:7%;top:26%\"></span>" +
+        "<span class=\"col-fruit floaty\" style=\"" + fruitStyle("berry", 0) + ";width:16%;right:13%;bottom:10%\"></span>";
+    }
+  })();
+</script>
+</body>
+</html>

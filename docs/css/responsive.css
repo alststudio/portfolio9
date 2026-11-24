@@ -1,0 +1,59 @@
+/* ============================================================
+   Blendy — penyesuaian responsif situs (di luar hero).
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .testi-card { flex-basis: calc(100% / 2); }
+  .modal-card { grid-template-columns: 1fr; }
+  .modal-media { min-height: 320px; }
+  .modal-bottle { width: 34%; }
+}
+
+@media (max-width: 820px) {
+  .section { padding: 68px 0; }
+  .intro-grid, .about-teaser, .contact-grid, .cart-layout, .account-grid { grid-template-columns: 1fr; }
+  .promo-banner { grid-template-columns: 1fr; padding: 38px 28px; }
+  .intro-visual { min-height: 340px; }
+  .site-nav {
+    display: none; position: absolute; top: 72px; left: 0; right: 0;
+    background: rgba(255, 253, 248, 0.98); flex-direction: column; gap: 0;
+    padding: 10px 24px 18px; border-bottom: 1px solid var(--line); margin-left: 0;
+  }
+  .site-nav.open { display: flex; }
+  .site-nav a { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .site-nav a:last-child { border-bottom: none; }
+  .nav-toggle { display: inline-flex; }
+  .site-actions { margin-left: 0; }
+  .site-actions .hide-sm { display: none; }
+  .form-card { padding: 28px 22px; }
+  .success-card { padding: 32px 22px; }
+}
+
+@media (max-width: 720px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card-media { min-height: 180px; }
+  .card-body { padding: 15px 14px 17px; }
+  .card-body h3 { font-size: 18px; }
+  .card-actions { flex-direction: column; }
+  .testi-card { flex-basis: 100%; margin: 0 4px; }
+  .newsletter-box { padding: 38px 24px; }
+  .newsletter-form { flex-direction: column; }
+  .vm-grid { grid-template-columns: 1fr; }
+  .rec-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .modal-info { padding: 26px 20px; }
+  .shop-tools { width: 100%; }
+  .shop-tools input[type="search"] { flex: 1; min-width: 150px; }
+}
+
+@media (max-width: 460px) {
+  .product-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; padding: 52px 0 36px; }
+  .wrap { width: calc(100% - 36px); }
+  .site-bar-inner, .footer-grid, .footer-bottom { width: calc(100% - 36px); }
+  .cart-line { flex-wrap: wrap; }
+  .voucher-row { flex-direction: column; }
+}
